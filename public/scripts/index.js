@@ -30,8 +30,10 @@ btn.addEventListener('click', async ()=>{
 })
 let btnEdit = document.getElementById('btnEdit')
 async function edit(a){
+    console.log(a)
     let req = await fetch('http://localhost:3333/post/getAll/')
     let posts = await req.json()
+    console.log(posts)
     posts.status.forEach(element => {
         if(element.id === a){
             let title = document.getElementById('editTitle')

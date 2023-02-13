@@ -9,14 +9,19 @@ async function MongoGetAll(nameAuthor){
         let allPost = []
         await post.find().forEach(p=>allPost.push(p))
         await mongo.close()
-        let myPosts = []
-        allPost.forEach(el => {
-            if(el.author == nameAuthor){
-                myPosts.push(el)
-            }
-        })
-
-        return await {status:myPosts}
+        if(nameAuthor == false){
+            return {status:allPost}
+        }else{
+            let myPosts = []
+            allPost.forEach(el => {
+                if(el.author == nameAuthor){
+                    myPosts.push(el)
+                }
+            })
+    
+            return await {status:myPosts}
+        }
+      
     } catch (error) {
         await mongo.close()
         return await {status: error.message}

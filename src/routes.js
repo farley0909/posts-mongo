@@ -49,7 +49,7 @@ router.post('/post/update/', async (req,res)=>{
     res.json(result)
 })
 router.get('/post/getAll/', async (req, res)=>{
-    let result = await MongoGetAll()
+    let result = await MongoGetAll(false)
     res.json(result)
 })
 router.get('/post/search/:content', async (req, res)=>{
