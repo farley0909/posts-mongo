@@ -4,16 +4,18 @@ let btn = document.getElementById('btnEnviaPost')
 btn.addEventListener('click', async ()=>{
     let title = document.getElementById('titleInput').value
     let content = document.getElementById('contentInput').value
+    let autor = document.getElementById('autorInput').value
+    console.log(autor)
     if(title.length <= 0 || content.length<=0){
         alert("O título ou o conteúdo do post está vazio")
     }
     let contentToSend = {
         title: title,
         content: content,
-        author: 'Jhon Doe'
+        author: autor
     }
     try {
-        let request = await fetch("http://localhost:8080/post/create/", {method:'POST', body:JSON.stringify(contentToSend),   headers: {
+        let request = await fetch("http://localhost:3333/post/create/", {method:'POST', body:JSON.stringify(contentToSend),   headers: {
             'Content-Type': 'application/json',
           },})
         let result =await  request.json()
@@ -28,7 +30,7 @@ btn.addEventListener('click', async ()=>{
 })
 let btnEdit = document.getElementById('btnEdit')
 async function edit(a){
-    let req = await fetch('http://localhost:8080/post/getAll/')
+    let req = await fetch('http://localhost:3333/post/getAll/')
     let posts = await req.json()
     posts.status.forEach(element => {
         if(element.id === a){
@@ -43,7 +45,7 @@ async function edit(a){
                     id:element.id
                 }
                 console.log(editContent)
-                   let c =  await fetch('http://localhost:8080/post/update/', {method:'POST', body:JSON.stringify(editContent),  headers: {
+                   let c =  await fetch('http://localhost:3333/post/update/', {method:'POST', body:JSON.stringify(editContent),  headers: {
                         'Content-Type': 'application/json',
                       } })
                     let d = await c.json()
@@ -57,7 +59,7 @@ async function edit(a){
    
 }
 async function postDelete(id){
-    let req = await fetch(`http://localhost:8080/post/delete/${id}` )
+    let req = await fetch(`http://localhost:3333/post/delete/${id}` )
     let posts = await req.json()
     document.location.reload(true);
 }
@@ -65,7 +67,7 @@ let search = document.getElementById('search')
 search.addEventListener('click', async ()=>{
    let content = document.getElementById('inputSearch').value
    try {
-    let req = await fetch(`http://localhost:8080/post/search/${content}` )
+    let req = await fetch(`http://localhost:3333/post/search/${content}` )
     let result =await req.json()
     let container = document.getElementById('contianerPosts')
     container.innerHTML=' '

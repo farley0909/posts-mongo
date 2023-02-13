@@ -1,5 +1,5 @@
 import { app } from "../src/app.js"
 
-const port  = 8080 || process.env.port
+const port  = 3333 || process.env.port
 
-app.listen(port, ()=>console.log("Server is running"))
+app.listen(port, ()=>console.log(`Server is runnin on port: ${port} ...`))
